@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-lg-12  col-sm-4 col-md-4 mt-3">
+    <input type="text" class="form-control" id="search" name="search" placeholder="Search by Productname" (input)="search(products.value)" #products>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-sm-4 col-md-4" *ngFor="let product of paginatedData;let i=index">
+        <a class="card" style="width:14rem;text-decoration: none;margin-top:10px" (click)="showDetails(product.productID);$event.stopPropagation()">
+            <img [src]="product.productImage" class="card-img-top" style="width:14rem;height:8rem">
+            <div class="card-body">
+              <h5 class="card-title">{{product.productName}}</h5>
+              <p class="card-text">{{product.productDescription}}</p>
+              <p>Rs.{{product.productPrice}}</p>
+              <button class="btn btn-warning" (click)="addToCart(product);$event.stopPropagation()">Add To Cart</button>
+            </div>
+        </a>
+    </div>
+  </div>
+  <p-toast></p-toast>
+  <div class="mt-4">
+    <p-paginator [rows]="4" [totalRecords]="totalRecords[0]" (onPageChange)="paginate($event)"></p-paginator>
+  </div>
+  
+
+ 

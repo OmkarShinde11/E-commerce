@@ -1,0 +1,17 @@
+<h4 style="text-align:center;color:green">Checking Out Products</h4>
+<ul class="list-group">
+    <li *ngFor="let product of checkOutCarts" class="list-group-item" style="display:flex;justify-content:space-between;align-items: center;">
+        <img [src]="product.productImage" style="width:100px;height:100px;">
+        <p>{{product.productName}} ({{product.productQuantity}})</p>
+        <p>RS. {{product.productPrice * product.productQuantity}}</p>
+    </li>
+    <ul class="list-group mt-4">
+        <li class="list-group-item" style="display:flex;justify-content:space-between;align-items: center;">
+            <span>Total (INR)</span>
+            <span>Rs. {{totalValue}}</span>
+        </li>
+    </ul>
+</ul>
+<div style="text-align:right">
+    <button class="btn btn-primary mt-4">Next</button>
+</div>

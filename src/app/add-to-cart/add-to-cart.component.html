@@ -1,0 +1,57 @@
+<div class="row" *ngIf="ProductCart.length==0">
+    <div class="col-md-12" style="text-align:center">
+        <h1>Oops! No Product found in cart</h1>
+        <button class="btn btn-primary" routerLink="/products">Shop Now</button>
+    </div>
+</div>
+
+<div class="row" *ngIf="ProductCart.length!=0">
+    <div class="col-md-7">
+        <div class="card mt-3">
+            <div class="card-body" style="text-align:center">
+              Products({{ProductCart.length}})
+            </div>
+        </div>
+        <div class="card mt-3" *ngFor="let product of ProductCart;let i=index">
+            <div class="card-body" style="display:flex;gap:30px">
+                <img [src]="product.productImage" class="img-fluid" style="width:150px;height:150px;">
+                <span>
+                    <h3>{{product.productName}}</h3>
+                    <p>Rs.{{product.productPrice * product.productQuantity}}</p>
+                </span>
+                <span>
+                    <h6 style="color:green">Delivery by 11 PM, Tomorrow</h6>
+                    <div class="input-group">
+                        <button class="btn btn-outline-secondary " type="button" (click)="decreaseCount(i)"  aria-expanded="false" [disabled]="product.productQuantity==1 || product.productQuantity==null" style="background:blue;color:white">-</button>
+                        <input type="text" class="form-control" [(ngModel)]="product.productQuantity" style="text-align:center;">
+                        <button class="btn btn-outline-secondary" type="button" (click)="increaseCount(i)" aria-expanded="false" style="background:blue;color:white">+</button>
+                    </div>
+                    <div class="mt-3" style="text-align:right">
+                        <button class="btn btn-danger" (click)="removeItem(i)">Remove Item</button>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card mt-3">
+            <h5 class="card-header">Your Cart  Details</h5>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let product of ProductCart;let i=index" style="display:flex;justify-content:space-between;align-items: center;">
+                    <span>{{product.productName}} ({{product.productQuantity}})</span>
+                    <p>RS. {{product.productPrice * product.productQuantity}}</p>
+                </li>
+              </ul>
+              <ul class="list-group mt-4">
+                <li class="list-group-item" style="display:flex;justify-content:space-between;align-items: center;">
+                    <span>Total (INR)</span>
+                    <p>RS. {{totalValue}}</p>
+                </li>
+              </ul>
+              <a class="btn btn-primary mt-4" style="margin-right:10px;" routerLink="/products">Continue Shopping</a>
+              <a class="btn btn-primary mt-4" routerLink="/checkout">Checkout</a>
+            </div>
+          </div>
+    </div>
+</div>
